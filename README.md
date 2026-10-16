@@ -1,7 +1,27 @@
-Este código implementa o controle de um robô móvel autônomo capaz de seguir uma linha no solo e desviar automaticamente de obstáculos frontais, operando em tempo real. O sistema integra sensores infravermelhos para navegação, um sensor de distância a laser (Time of Flight) para detecção de obstáculos, quatro motores DC para locomoção e LEDs para sinalização do estado operacional.
+# Carrinho Autônomo com ESP32
 
-A lógica de controle é baseada em prioridade: a detecção de obstáculos tem precedência sobre o seguimento de linha, garantindo segurança durante o deslocamento. Sempre que um objeto é identificado abaixo da distância limite configurada, o robô interrompe o movimento e executa uma manobra de desvio antes de retomar a navegação normal.
+Projeto final do 1º semestre do curso Técnico em Redes de Computadores (SENAI São Caetano do Sul, Cyber e IA).
 
-Na ausência de obstáculos, o algoritmo analisa continuamente a posição da linha em relação aos sensores e ajusta a trajetória por meio de correções direcionais ou avanço reto. Caso a linha não seja detectada, o sistema entra em estado de parada.
+Robô móvel autônomo que **segue uma linha no solo** e **desvia de obstáculos** em tempo real.
 
-A solução apresenta estrutura modular, resposta rápida e integração eficiente entre sensores e atuadores, caracterizando um sistema embarcado robusto voltado para aplicações em robótica móvel autônoma e desenvolvimento técnico profissional.
+## Como funciona
+
+- **Navegação:** 8 sensores infravermelhos (lidos por um expansor MCP23017) acompanham a linha e corrigem a direção.
+- **Obstáculos:** um sensor de distância a laser **VL53L0X (Time of Flight)** detecta objetos à frente. A detecção de obstáculo tem prioridade sobre o seguimento de linha: o robô para, faz uma manobra de desvio e volta para a rota.
+- **Movimento:** quatro motores DC.
+- **Sinalização:** LEDs indicam o estado do robô.
+- Se a linha não for detectada, o robô entra em estado de parada por segurança.
+
+## Hardware e bibliotecas
+
+ESP32 · MCP23017 · VL53L0X · sensores IR · 4 motores DC · LEDs
+
+Bibliotecas: `Wire`, `Adafruit_MCP23017`, `VL53L0X`
+
+## Código
+
+O código está em [`ESP32.sh`](ESP32.sh). Apesar da extensão, é um sketch em **C++ para Arduino/ESP32**: para usar, copie o conteúdo para um arquivo `.ino` e abra na Arduino IDE.
+
+---
+
+Autor: [Matheus Ziravello](https://www.linkedin.com/in/matheus-ziravello-283b18310) · [Portfólio](https://mathziraa.github.io)
